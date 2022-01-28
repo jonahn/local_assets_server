@@ -125,13 +125,12 @@ class LocalAssetsServer {
     }
 
     if (_rootDir == null) {
-      ByteData data = await rootBundle.load(join(assetsBasePath, path));
+      ByteData data = await rootBundle.load(assetsBasePath+ "/" +path);
       AssetsCache.assets[path] = data;
       return data;
     }
 
-    print(join(_rootDir!.path, path));
-    final f = File(join(_rootDir!.path, path));
+    final f = File(_rootDir!.path + "/" + path);
     return (await f.readAsBytes()).buffer.asByteData();
   }
 }
